@@ -3,6 +3,8 @@
 
 A web component that wraps a text input element and adds date-picker functionality to it.
 
+Live demo available [here.](http://51.38.51.120/wc-datepicker/)
+
 ## Features
 
 Wc-datepicker is a stand-alone vanilla JS web component that does not use shadow DOM. The component wraps a text input element and adds date-picker functionality to it. The calendar will appear when the input element gets focus.
