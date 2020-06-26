@@ -4,7 +4,8 @@
   "description": "A web component that wraps a text input element and adds date-picker functionality to it.",
   "main": "dist/wc-datepicker-node.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preversion": "",
+    "postversion": "git push --follow-tags"
   },
   "files": [
     "dist/wc-datepicker-node.min.js",
