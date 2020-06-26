@@ -1,0 +1,35 @@
+{
+  "name": "@vanillawc/wc-datepicker",
+  "version": "0.0.0",
+  "description": "A web component that wraps a text input element and adds date-picker functionality to it.",
+  "main": "dist/wc-datepicker-node.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "dist/wc-datepicker-node.min.js",
+    "dist/wc-datepicker-node.js",
+    "dist/minify.cmd",
+    "dist/template_minifier.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanillawc/wc-datepicker.git"
+  },
+  "keywords": [
+    "web-component",
+    "custom-element",
+    "vanilla-web-component",
+    "html",
+    "javascript",
+    "datepicker",
+    "date-picker",
+    "calendar"
+  ],
+  "author": "Jussi Utunen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vanillawc/wc-datepicker/issues"
+  },
+  "homepage": "https://github.com/vanillawc/wc-datepicker#readme"
+}
