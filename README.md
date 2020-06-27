@@ -1,3 +1,5 @@
+[![minified](https://badgen.net/badge/minified/9.4%20kB/blue)](https://badgen.net/badge/minified/9.4%20kB/blue)
+[![minified & compressed](https://badgen.net/badge/minified%20&%20compressed/3.1%20kB/blue)](https://badgen.net/badge/minified%20&%20compressed/3.1%20kB/blue)
 
 # wc-datepicker
 
