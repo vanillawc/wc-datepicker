@@ -21,6 +21,7 @@ export class Datepicker extends HTMLElement {
       border:1px solid black;
       position:absolute;
       background-color:white;
+      z-index:1000;
     }
     #calHeader {
       display:flex;
@@ -160,7 +161,6 @@ export class Datepicker extends HTMLElement {
       return
     }
     var mainContainer = document.createElement('div')
-    // mainContainer.style.all = 'inherit'
     mainContainer.style.display = 'inline-block'
     if (this.container) {
       this.container.remove()
@@ -237,6 +237,7 @@ export class Datepicker extends HTMLElement {
     this._inputStrIsValidDate = true
     this._setNewDateValue(event.target.innerHTML, this.displayedMonth, this.displayedYear)
     this.textInputElement.value = this._returnDateString(this.dateObj)
+    this.textInputElement.dispatchEvent(new CustomEvent('dateselect'))
     this._renderCalendar()
     if (!this.persistOnSelect) {
       this._hideCalendar()
@@ -244,9 +245,7 @@ export class Datepicker extends HTMLElement {
   }
 
   _hideCalendar () {
-    this.calContainer.style.display = 'none'
     document.activeElement.blur()
-    this._mouseUpEventHandler()
   }
 
   _calKeyDownEventHandler (event) {
@@ -264,7 +263,7 @@ export class Datepicker extends HTMLElement {
         ctx.calContainer.style.display = 'none'
         ctx._mouseUpEventHandler()
         if (!ctx._inputStrIsValidDate) {
-          ctx.dispatchEvent(new Event('invalid'))
+          ctx.textInputElement.dispatchEvent(new Event('invalid'))
         }
       }
     }
@@ -349,6 +348,7 @@ export class Datepicker extends HTMLElement {
       this._setNewDateValue(obj.day, obj.month, obj.year)
       this.displayedMonth = obj.month
       this.displayedYear = obj.year
+      this.textInputElement.dispatchEvent(new CustomEvent('dateselect'))
       this._renderCalendar()
     } else {
       this._inputStrIsValidDate = false
@@ -502,7 +502,6 @@ export class Datepicker extends HTMLElement {
       // this.dateObj.setDate(day) <-- https://stackoverflow.com/questions/14680396/the-date-getmonth-method-has-bug
       // Use setMonth with 2 params instead:
       this.dateObj.setMonth(month, day)
-      this.dispatchEvent(new CustomEvent('datechange'))
     }
   }
 
