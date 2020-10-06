@@ -21,6 +21,7 @@ Component features include:
 - written date input & validation
 - keyboard accessible calendar (tabindex)
 - rapid month/year switching with long press
+- Angular compatibility (see below)
 
 ## Including the component to an HTML file
 
@@ -181,21 +182,12 @@ It must return an object with either 1 or 4 properties:
 
 Methods *getDateString()* and *getDateObject()* can also be used for validating the date, see above.
 ## Events
-If the input element loses focus and the date string is not valid, datepicker shall dispatch [invalid](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event) event.
+If the input element loses focus and the date string is not valid, text input element shall dispatch [invalid](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event) event.
 
-When the date string is changed to a new valid date or a new date is selected from the calendar, datepicker shall dispatch *datechange* event.
+When the date string is edited to be a valid date or a new date is selected from the calendar, text input element shall dispatch *dateselect* event, which is a non-standard custom event.
 
-*datechange* is a custom event. It can be replaced with a more standard [change](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event) event by changing the following code line:
-   ```javascript
-   this.dispatchEvent(new CustomEvent('datechange'))
-   ```
-to this:
-   ```javascript
-   this.dispatchEvent(new Event('change'))
-   ```
-**Notice:**
+*Notice that event dispatching has changed since version 0.0.3. Starting from version 0.0.4, it is the wrapped input element instead of the custom element that shall dispatch events. Custom event name has been changed from datechange to dateselect.*
 
-The input element dispatches change events too. If datepicker and its input element both dispatch change events, the event handler must examine the event in further detail in order to determine its origin.
 ## Style and layout
 The style is defined in the HTML template string inside the component's contructor.
 Styling can be moved to an external CSS file by cutting and pasting everything that's inside style tags and then removing the void tags.
@@ -219,6 +211,51 @@ Calendar's adjacent month day numbers can be changed to invisible by replacing t
 visibility:hidden;
 ```
 
+## Angular usage
+
+Using FLUX dataflow and one-way binding:
+
+```html
+    <wc-datepicker>
+      <input
+        [ngModel]="whatever.date"
+        (dateselect)="getDate($event)"
+        (invalid)="notifyError()"
+        type="text"
+      />
+    </wc-datepicker>
+```
+
+Ignoring component's invalid event and validating date externally:
+
+```html
+    <wc-datepicker>
+      <input
+        [ngModel]="whatever.date"
+        (dateselect)="getDate($event)"
+        (change)="validateDate($event)"
+        type="text"
+      />
+    </wc-datepicker>
+```
+
+Using distinct icon/button to activate the calendar:
+
+```html
+    <wc-datepicker #mypicker ignore-on-focus>
+      <input
+        [ngModel]="whatever.date"
+        (dateselect)="getDate($event)"
+        type="text"
+      />
+    </wc-datepicker>
+    <div>
+      <img
+        src="calendar.jpg"
+        (click)="mypicker.setFocusOnCal()"
+      >
+    </div>
+```
 ## Building
 Unminified scripts in the dist folder can be used and modified as such, there are no build scripts available for them.
 
@@ -234,6 +271,6 @@ Building (minifying) requires [terser](https://github.com/terser/terser) command
 Questions, suggestions and bug reports are welcome. Safari testing would be nice.
 
 ## License
-Copyright (c) 2019 Jussi Utunen
+Copyright (c) 2019-2020 Jussi Utunen
 
 Licensed under the MIT License
