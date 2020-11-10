@@ -5,7 +5,7 @@
 
 A web component that wraps a text input element and adds date-picker functionality to it.
 
-Live demo available [here.](http://51.38.51.120/wc-datepicker/)
+Live demo available [here.](http://135.181.40.67/wc-datepicker/)
 
 ## Features
 
