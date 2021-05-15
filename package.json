@@ -1,6 +1,6 @@
 {
   "name": "@vanillawc/wc-datepicker",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A web component that wraps a text input element and adds date-picker functionality to it.",
   "main": "dist/wc-datepicker-node.min.js",
   "scripts": {
