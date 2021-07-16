@@ -245,7 +245,12 @@ class Datepicker extends HTMLElement {
   }
 
   _hideCalendar () {
-    document.activeElement.blur()
+    this.getActiveElement().blur()
+  }
+
+  getActiveElement() {
+    if (this.getRootNode && this.getRootNode() && this.getRootNode().activeElement) return this.getRootNode().activeElement
+    return document.activeElement
   }
 
   _calKeyDownEventHandler (event) {
@@ -259,7 +264,7 @@ class Datepicker extends HTMLElement {
     // After calContainer onclick, focus will be on body unless following delay is introduced:
     setTimeout(() => { checkActiveElement(this) }, 0)
     function checkActiveElement (ctx) {
-      if (!(document.activeElement.id === 'calContainer' || document.activeElement.classList.contains('calCtrl') || document.activeElement.classList.contains('calDay') || document.activeElement.isSameNode(ctx.textInputElement))) {
+      if (!(ctx.getActiveElement().id === 'calContainer' || ctx.getActiveElement().classList.contains('calCtrl') || ctx.getActiveElement().classList.contains('calDay') || ctx.getActiveElement().isSameNode(ctx.textInputElement))) {
         ctx.calContainer.style.display = 'none'
         ctx._mouseUpEventHandler()
         if (!ctx._inputStrIsValidDate) {
